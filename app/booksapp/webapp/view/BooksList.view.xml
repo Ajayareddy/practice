@@ -1,0 +1,29 @@
+<mvc:View controllerName="booksnspace.booksapp.controller.BooksList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="Books List">
+     <content>
+     <Table id="booksTable" items="{books>/Books}">
+                <columns>
+                    <Column><Text text="Book ID" /></Column>
+                    <Column><Text text="Title" /></Column>
+                    <Column><Text text="Author" /></Column>
+                    <Column><Text text="Price" /></Column>
+                    <Column><Text text="Stock" /></Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{books>ID}" />
+                            <Text text="{books>title}" />
+                            <Text text="{books>author_ID}" />
+                            <Text text="{books>price}" />
+                            <Text text="{books>stock}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            <Button text="Go to Authors" press="onNavigateToAuthor" />
+        </content>
+    </Page>
+</mvc:View>

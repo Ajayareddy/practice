@@ -1,0 +1,26 @@
+<mvc:View xmlns:table="sap.ui.table" controllerName="booksnspace.booksapp.controller.AuthorsList"
+    xmlns:mvc="sap.ui.core.mvc"
+
+    xmlns="sap.m">
+    <Page id="page2" title="Authors List">
+     <content>
+                  <Table id="authorsTable" items="{authors>/Authors}">
+                <columns>
+                    <Column><Text text="Author ID" /></Column>
+                    <Column><Text text="Author Name" /></Column>
+                  
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{authors>ID}" />
+                            <Text text="{authors>name}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+   
+            <Button text="Back to Books" press="onNavigateBack" />
+        </content>
+    </Page>
+</mvc:View>

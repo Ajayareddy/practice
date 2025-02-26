@@ -1,0 +1,157 @@
+_schema-version: 3.3.0
+ID: myShop
+description: A simple CAP project.
+version: 1.0.0
+modules:
+- name: myShop-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: myShop-db
+  - name: uaa_myShop
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+    readiness-health-check-http-endpoint: /health
+    readiness-health-check-type: http
+  build-parameters:
+    builder: npm
+- name: myShop-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: myShop-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: myShop-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: myShop-destination-service
+    parameters:
+      content-target: true
+  - name: myShop_html_repo_host
+    parameters:
+      service-key:
+        name: myShop_html_repo_host-key
+  - name: uaa_myShop
+    parameters:
+      service-key:
+        name: uaa_myShop-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: myshoprouter_myShop_html_repo_host
+          ServiceInstanceName: myShop-html5-app-host-service
+          ServiceKeyName: myShop_html_repo_host-key
+          sap.cloud.service: myshoprouter
+        - Authentication: OAuth2UserTokenExchange
+          Name: myshoprouter_uaa_myShop
+          ServiceInstanceName: myShop-xsuaa-service
+          ServiceKeyName: uaa_myShop-key
+          sap.cloud.service: myshoprouter
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: myShop-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: myShop-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - booksnspacebooksapp.zip
+      name: booksnspacebooksapp
+      target-path: resources/
+    - artifacts:
+      - appnspacenavapp.zip
+      name: appnspacenavapp
+      target-path: resources/
+- name: booksnspacebooksapp
+  type: html5
+  path: app/booksapp
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: appnspacenavapp
+  type: html5
+  path: app/navapp
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: myShop-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+- name: myShop-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            Name: myShop-srv-api
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: myShop-destination-service
+    service-plan: lite
+  requires:
+  - name: srv-api
+- name: myShop_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: myShop-html5-app-host-service
+    service-plan: app-host
+- name: uaa_myShop
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: myShop-xsuaa-service
+    service-plan: application
+- name: myShop-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: myShop-html5-service
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production

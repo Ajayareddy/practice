@@ -1,0 +1,82 @@
+<mvc:View controllerName="booksnspace.booksapp.controller.App" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt" height="100%">
+    <tnt:ToolPage id="toolPage">
+        <tnt:header>
+            <tnt:ToolHeader>
+                <Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+                <ToolbarSpacer width="20px" />
+                <Button text="File" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="Low" />
+                    </layoutData>
+                </Button>
+                <Button text="Edit" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="Low" />
+                    </layoutData>
+                </Button>
+                <Button text="View" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="Low" />
+                    </layoutData>
+                </Button>
+                <Button text="Navigate" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="Low" />
+                    </layoutData>
+                </Button>
+                <Button text="Code" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="Low" />
+                    </layoutData>
+                </Button>
+                <Button text="Refactor" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="Low" />
+                    </layoutData>
+                </Button>
+                <Button text="Run" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="Low" />
+                    </layoutData>
+                </Button>
+                <Button text="Tools" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="Low" />
+                    </layoutData>
+                </Button>
+                <tnt:ToolHeaderUtilitySeparator />
+                <ToolbarSpacer>
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" minWidth="20px" />
+                    </layoutData>
+                </ToolbarSpacer>
+                <Button text="Alan Smith" type="Transparent" press=".handleUserNamePress" ariaHasPopup="Menu">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+            </tnt:ToolHeader>
+        </tnt:header>
+       <tnt:sideContent>
+            <tnt:SideNavigation expanded="true" itemSelect=".onItemSelect">
+                <tnt:NavigationList>
+                    <tnt:NavigationListItem text="Home" icon="sap-icon://home" key="home"/>
+                    <tnt:NavigationListItem text="Author List" icon="sap-icon://employee" key="authorList"/>
+                    <tnt:NavigationListItem text="Books List" icon="sap-icon://book" key="booksList"/>
+                </tnt:NavigationList>
+            </tnt:SideNavigation>
+        </tnt:sideContent>
+
+        <!-- Main Content Area: Uses NavContainer to switch views -->
+        <tnt:mainContents>
+            <NavContainer id="appNavContainer"/>
+        </tnt:mainContents>
+</tnt:ToolPage>
+</mvc:View>
