@@ -1,29 +1,62 @@
 <mvc:View controllerName="booksnspace.booksapp.controller.BooksList"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
+
     <Page id="page" title="Books List">
-     <content>
-     <Table id="booksTable" items="{books>/Books}">
-                <columns>
-                    <Column><Text text="Book ID" /></Column>
-                    <Column><Text text="Title" /></Column>
-                    <Column><Text text="Author" /></Column>
-                    <Column><Text text="Price" /></Column>
-                    <Column><Text text="Stock" /></Column>
-                </columns>
-                <items>
-                    <ColumnListItem>
-                        <cells>
-                            <Text text="{books>ID}" />
-                            <Text text="{books>title}" />
-                            <Text text="{books>author_ID}" />
-                            <Text text="{books>price}" />
-                            <Text text="{books>stock}" />
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
+        <content>
+            <VBox>
+                <HBox>
+                    <Button text="Add Book" press="onAddBook" icon="sap-icon://add-document" />
+                    <Button text="Delete Selected" press="onDeleteBook" icon="sap-icon://delete" />
+                    <Button text="Save Changes" press="onSaveChanges" icon="sap-icon://save" />
+                </HBox>
+
+                <Table id="booksTable" items="{books>/Books}" mode="SingleSelectMaster">
+                    <columns>
+                        <Column><Text text="Book ID" /></Column>
+                        <Column><Text text="Title" /></Column>
+                        <Column><Text text="Author" /></Column>
+                        <Column><Text text="Price" /></Column>
+                        <Column><Text text="Stock" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Active" press="onEditBook">
+                            <cells>
+                                <Input value="{books>ID}" editable="false" />
+                                <Input value="{books>title}" />
+                                <Input value="{books>author_ID}" />
+                                <Input value="{books>price}" type="Number" />
+                                <Input value="{books>stock}" type="Number" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+            <VBox id="testtable">
+            <Text text="test"></Text></VBox>
+
             <Button text="Go to Authors" press="onNavigateToAuthor" />
         </content>
     </Page>
+
+    <!-- Add Book Dialog -->
+    <Dialog id="addBookDialog" title="Add New Book">
+        <content>
+            <VBox>
+                <Label text="Title" />
+                <Input id="newTitle" />
+                <Label text="Author ID" />
+                <Input id="newAuthorID" />
+                <Label text="Price" />
+                <Input id="newPrice" type="Number" />
+                <Label text="Stock" />
+                <Input id="newStock" type="Number" />
+            </VBox>
+        </content>
+        <buttons>
+            <Button text="Add" press="onConfirmAddBook" />
+            <Button text="Cancel" press="onCancelAddBook" />
+        </buttons>
+    </Dialog>
+
 </mvc:View>

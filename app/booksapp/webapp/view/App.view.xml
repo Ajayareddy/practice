@@ -76,7 +76,7 @@
 
         <!-- Main Content Area: Uses NavContainer to switch views -->
         <tnt:mainContents>
-            <NavContainer id="appNavContainer"/>
+            <NavContainer  id="appNavContainer"/>
         </tnt:mainContents>
 </tnt:ToolPage>
 </mvc:View>
