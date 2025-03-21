@@ -1,0 +1,26 @@
+<mvc:View xmlns:table="sap.ui.table" controllerName="booksapp.controller.AuthorsList"
+    xmlns:mvc="sap.ui.core.mvc"
+
+    xmlns="sap.m">
+    <Page id="page2" title="Authors List" >
+     <content>
+                  <Table id="authorsTable" items="{authors>/Authors}">
+                <columns>
+                    <Column id="_IDGenColumn"><Text id="_IDGenText6" text="Author ID" /></Column>
+                    <Column id="_IDGenColumn6"><Text id="_IDGenText7" text="Author Name" /></Column>
+                  
+                </columns>
+                <items>
+                    <ColumnListItem id="_IDGenColumnListItem2">
+                        <cells>
+                            <Text id="_IDGenText8" text="{authors>ID}" />
+                            <Text id="_IDGenText9" text="{authors>name}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+   
+            <Button id="_IDGenButton15" text="Back to Books" press="onNavigateBack" />
+        </content>
+    </Page>
+</mvc:View>

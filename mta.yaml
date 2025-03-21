@@ -1,0 +1,150 @@
+_schema-version: 3.3.0
+ID: MyShop
+description: A simple CAP project.
+version: 1.0.0
+modules:
+- name: MyShop-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: MyShop-db
+  - name: uaa_MyShop
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+    instances: 1
+  build-parameters:
+    builder: npm-ci
+- name: MyShop-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: MyShop-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: MyShop-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: MyShop-destination-service
+    parameters:
+      content-target: true
+  - name: MyShop_html_repo_host
+    parameters:
+      service-key:
+        name: MyShop_html_repo_host-key
+  - name: uaa_MyShop
+    parameters:
+      service-key:
+        name: uaa_MyShop-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: BooksAppRouter_MyShop_html_repo_host
+          ServiceInstanceName: MyShop-html5-app-host-service
+          ServiceKeyName: MyShop_html_repo_host-key
+          sap.cloud.service: BooksAppRouter
+        - Authentication: OAuth2UserTokenExchange
+          Name: BooksAppRouter_uaa_MyShop
+          ServiceInstanceName: MyShop-xsuaa-service
+          ServiceKeyName: uaa_MyShop-key
+          sap.cloud.service: BooksAppRouter
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: MyShop-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: MyShop_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - bookslist.zip
+      name: bookslist
+      target-path: resources/
+    - artifacts:
+      - booksapp.zip
+      name: booksapp
+      target-path: resources/
+- name: bookslist
+  type: html5
+  path: app/bookslist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: booksapp
+  type: html5
+  path: app/booksapp
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: MyShop-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+- name: MyShop-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            Name: MyShop-srv-api
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: MyShop-destination-service
+    service-plan: lite
+  requires:
+  - name: srv-api
+- name: MyShop_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: MyShop-html5-app-host-service
+    service-plan: app-host
+- name: uaa_MyShop
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: MyShop-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production
