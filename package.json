@@ -7,6 +7,8 @@
   "private": true,
   "dependencies": {
     "@cap-js/hana": "^1",
+    "@sap-cloud-sdk/http-client": "^3.26.4",
+    "@sap-cloud-sdk/resilience": "^3.26.4",
     "@sap/cds": "^8",
     "@sap/xssec": "^4.4.0",
     "express": "^4"
@@ -27,8 +29,15 @@
     "watch-booksapp": "cds watch --open booksapp/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
-    "sql": {
-      "native_hana_associations": false
+    "requires": {
+   
+      "destinations": true,
+      "books": {
+        "kind": "odata",
+        "credentials": {
+          "destination": "booksrv"
+        }
+      }
     }
   },
   "sapux": [

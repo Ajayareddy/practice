@@ -9,6 +9,7 @@ modules:
   requires:
   - name: MyShop-db
   - name: uaa_MyShop
+  - name: books
   provides:
   - name: srv-api
     properties:
@@ -99,6 +100,11 @@ resources:
   parameters:
     service: hana
     service-plan: hdi-shared
+- name: books
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-plan: lite
 - name: MyShop-destination-service
   type: org.cloudfoundry.managed-service
   parameters:

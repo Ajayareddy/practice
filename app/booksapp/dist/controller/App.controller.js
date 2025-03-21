@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],e=>{"use strict";return e.extend("booksapp.controller.App",{onInit(){this.getOwnerComponent().getRouter().navTo("TargetBooksList")},onItemSelect:function(e){var t=e.getParameter("item").getKey();var o=this.getOwnerComponent().getRouter();debugger;if(t==="booksList"){o.navTo("RouteBooksList")}else if(t==="authorList"){o.navTo("RouteAuthorsList")}}})});
+//# sourceMappingURL=App.controller.js.map

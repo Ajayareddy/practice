@@ -1,0 +1,81 @@
+<mvc:View controllerName="booksapp.controller.App" displayBlock="true"
+    xmlns:tnt="sap.tnt"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <tnt:ToolPage id="toolPage">
+        <tnt:header>
+            <tnt:ToolHeader id="_IDGenToolHeader">
+                <Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1" priority="NeverOverflow"/>
+                    </layoutData>
+                </Button>
+                <ToolbarSpacer id="_IDGenToolbarSpacer" width="20px"/>
+                <Button id="_IDGenButton6" text="File" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData2" priority="Low"/>
+                    </layoutData>
+                </Button>
+                <Button id="_IDGenButton7" text="Edit" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData3" priority="Low"/>
+                    </layoutData>
+                </Button>
+                <Button id="_IDGenButton8" text="View" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData4" priority="Low"/>
+                    </layoutData>
+                </Button>
+                <Button id="_IDGenButton9" text="Navigate" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData5" priority="Low"/>
+                    </layoutData>
+                </Button>
+                <Button id="_IDGenButton10" text="Code" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData6" priority="Low"/>
+                    </layoutData>
+                </Button>
+                <Button id="_IDGenButton11" text="Refactor" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData7" priority="Low"/>
+                    </layoutData>
+                </Button>
+                <Button id="_IDGenButton12" text="Run" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData8" priority="Low"/>
+                    </layoutData>
+                </Button>
+                <Button id="_IDGenButton13" text="Tools" type="Transparent">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData9" priority="Low"/>
+                    </layoutData>
+                </Button>
+                <tnt:ToolHeaderUtilitySeparator id="_IDGenToolHeaderUtilitySeparator"/>
+                <ToolbarSpacer id="_IDGenToolbarSpacer1">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData10" priority="NeverOverflow" minWidth="20px"/>
+                    </layoutData>
+                </ToolbarSpacer>
+                <Button id="_IDGenButton14" text="Alan Smith" type="Transparent" press=".handleUserNamePress" ariaHasPopup="Menu">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData11" priority="NeverOverflow"/>
+                    </layoutData>
+                </Button>
+            </tnt:ToolHeader>
+        </tnt:header>
+        <tnt:sideContent>
+            <tnt:SideNavigation id="_IDGenSideNavigation" expanded="true" itemSelect=".onItemSelect">
+                <tnt:NavigationList id="_IDGenNavigationList">
+                    <tnt:NavigationListItem id="_IDGenNavigationListItem" text="Home" icon="sap-icon://home" key="home"/>
+                    <tnt:NavigationListItem id="_IDGenNavigationListItem1" text="Author List" icon="sap-icon://employee" key="authorList"/>
+                    <tnt:NavigationListItem id="_IDGenNavigationListItem2" text="Books List" icon="sap-icon://book" key="booksList"/>
+                </tnt:NavigationList>
+            </tnt:SideNavigation>
+        </tnt:sideContent>
+        <!--  Main Content Area: Uses NavContainer to switch views  -->
+        <tnt:mainContents>
+            <NavContainer id="appNavContainer"/>
+        </tnt:mainContents>
+    </tnt:ToolPage>
+</mvc:View>
