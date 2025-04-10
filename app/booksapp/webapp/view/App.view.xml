@@ -16,41 +16,10 @@
                         <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData2" priority="Low"/>
                     </layoutData>
                 </Button>
-                <Button id="_IDGenButton7" text="Edit" type="Transparent">
-                    <layoutData>
-                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData3" priority="Low"/>
-                    </layoutData>
-                </Button>
-                <Button id="_IDGenButton8" text="View" type="Transparent">
-                    <layoutData>
-                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData4" priority="Low"/>
-                    </layoutData>
-                </Button>
-                <Button id="_IDGenButton9" text="Navigate" type="Transparent">
-                    <layoutData>
-                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData5" priority="Low"/>
-                    </layoutData>
-                </Button>
-                <Button id="_IDGenButton10" text="Code" type="Transparent">
-                    <layoutData>
-                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData6" priority="Low"/>
-                    </layoutData>
-                </Button>
-                <Button id="_IDGenButton11" text="Refactor" type="Transparent">
-                    <layoutData>
-                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData7" priority="Low"/>
-                    </layoutData>
-                </Button>
-                <Button id="_IDGenButton12" text="Run" type="Transparent">
-                    <layoutData>
-                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData8" priority="Low"/>
-                    </layoutData>
-                </Button>
-                <Button id="_IDGenButton13" text="Tools" type="Transparent">
-                    <layoutData>
-                        <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData9" priority="Low"/>
-                    </layoutData>
-                </Button>
+               
+                
+               
+                
                 <tnt:ToolHeaderUtilitySeparator id="_IDGenToolHeaderUtilitySeparator"/>
                 <ToolbarSpacer id="_IDGenToolbarSpacer1">
                     <layoutData>
@@ -65,7 +34,7 @@
             </tnt:ToolHeader>
         </tnt:header>
         <tnt:sideContent>
-            <tnt:SideNavigation id="_IDGenSideNavigation" expanded="true" itemSelect=".onItemSelect">
+            <tnt:SideNavigation id="_IDGenSideNavigation" expanded="true"  selectedKey="{/selectedNavKey}" itemSelect=".onItemSelect">
                 <tnt:NavigationList id="_IDGenNavigationList">
                     <tnt:NavigationListItem id="_IDGenNavigationListItem" text="Home" icon="sap-icon://home" key="home"/>
                     <tnt:NavigationListItem id="_IDGenNavigationListItem1" text="Author List" icon="sap-icon://employee" key="authorList"/>

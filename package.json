@@ -35,7 +35,7 @@
       "books": {
         "kind": "odata",
         "credentials": {
-          "destination": "booksrv"
+          "destination": "whatsapp"
         }
       }
     }

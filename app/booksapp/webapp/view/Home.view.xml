@@ -1,0 +1,15 @@
+<mvc:View
+    controllerName="booksapp.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page id="homePage" title="Welcome to Books App">
+        <content>
+            <VBox id="_IDGenVBox3" class="sapUiSmallMargin">
+                <Title id="_IDGenTitle" text="Hello and Welcome!" level="H1" />
+                <Text id="_IDGenText10" text="Use the side navigation to explore authors and books." />
+            </VBox>
+        </content>
+    </Page>
+
+</mvc:View>

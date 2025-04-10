@@ -116,8 +116,15 @@
       },
       "routes": [
         {
+          "name": "RouteHome",
+          "pattern": "Home",
+          "target": [
+            "TargetHome"
+          ]
+        },
+        {
           "name": "RouteBooksList",
-          "pattern": ":?query:",
+          "pattern": "BooksList",
           "target": [
             "TargetBooksList"
           ]
@@ -131,6 +138,10 @@
         }
       ],
       "targets": {
+        "TargetHome": {
+          "id": "Home",
+          "name": "Home"
+        },
         "TargetBooksList": {
           "id": "BooksList",
           "name": "BooksList"
