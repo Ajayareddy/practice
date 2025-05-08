@@ -11,6 +11,7 @@
     "@sap-cloud-sdk/resilience": "^3.26.4",
     "@sap/cds": "^8",
     "@sap/xssec": "^4.4.0",
+    "apollo-server-express": "^3.13.0",
     "express": "^4"
   },
   "devDependencies": {
@@ -26,11 +27,12 @@
     "undeploy": "cf undeploy MyShop --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
-    "watch-booksapp": "cds watch --open booksapp/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-booksapp": "cds watch --open booksapp/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-bookslistreport": "cds watch --open bookslistreport/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-authorslistreport": "cds watch --open authorslistreport/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
-   
       "destinations": true,
       "books": {
         "kind": "odata",
@@ -41,7 +43,8 @@
     }
   },
   "sapux": [
-    "app/bookslist",
-    "app/booksapp"
+    "app/booksapp",
+    "app/bookslistreport",
+    "app/authorslistreport"
   ]
 }

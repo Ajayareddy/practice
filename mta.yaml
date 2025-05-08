@@ -67,16 +67,20 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - bookslist.zip
-      name: bookslist
-      target-path: resources/
-    - artifacts:
       - booksapp.zip
       name: booksapp
       target-path: resources/
-- name: bookslist
+    - artifacts:
+      - bookslistreport.zip
+      name: bookslistreport
+      target-path: resources/
+    - artifacts:
+      - authorslistreport.zip
+      name: authorslistreport
+      target-path: resources/
+- name: booksapp
   type: html5
-  path: app/bookslist
+  path: app/booksapp
   build-parameters:
     build-result: dist
     builder: custom
@@ -84,9 +88,19 @@ modules:
     - npm install
     - npm run build:cf
     supported-platforms: []
-- name: booksapp
+- name: bookslistreport
   type: html5
-  path: app/booksapp
+  path: app/bookslistreport
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: authorslistreport
+  type: html5
+  path: app/authorslistreport
   build-parameters:
     build-result: dist
     builder: custom

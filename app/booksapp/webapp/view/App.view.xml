@@ -38,7 +38,7 @@
                 <tnt:NavigationList id="_IDGenNavigationList">
                     <tnt:NavigationListItem id="_IDGenNavigationListItem" text="Home" icon="sap-icon://home" key="home"/>
                     <tnt:NavigationListItem id="_IDGenNavigationListItem1" text="Author List" icon="sap-icon://employee" key="authorList"/>
-                    <tnt:NavigationListItem id="_IDGenNavigationListItem2" text="Books List" icon="sap-icon://book" key="booksList"/>
+                    <tnt:NavigationListItem id="_IDGenNavigationListItem2" text="Books List" icon="sap-icon://course-book" key="booksList"/>
                 </tnt:NavigationList>
             </tnt:SideNavigation>
         </tnt:sideContent>
